@@ -3,6 +3,11 @@ import Inicio from "./pages/Inicio";
 import Servicios from "./pages/Servicios";
 import Navbar from "./pages/Navbar";
 import Productos from "./pages/Productos";
+
+
+
+
+
 import ProductoDetalle from "./pages/DetalleProdutos";
 import Pagar from "./pages/Pagar";
 import RutaProtegida from "./pages/RutaProtegida";
@@ -15,6 +20,7 @@ import { ProductsProvider } from "./context/ProductsContext";
 import Dashboard from "./pages/Dashboard";
 import FormularioProducto from './components/FormularioProducto';
 import EliminarProducto from './components/EliminarProducto';
+import Categoria from "./pages/Categoria";
 
 function App() {
   return (
@@ -24,21 +30,27 @@ function App() {
           <ProductsProvider>
             <Navbar />
             <Routes>
-             
+
               {/* RUTAS PÚBLICAS */}
               <Route path="/" element={<Inicio />} />
               <Route path="/servicios" element={<Servicios />} />
               <Route path="/productos" element={<Productos />} />
+              <Route path="/productos/categoria/:categoria" element={<Productos />} />
               <Route path="/productos/:id" element={<ProductoDetalle />} />
               <Route path="/productos/:categoria/:id" element={<ProductoDetalle />} />
               <Route path="/iniciar-sesion" element={<IniciarSesion />} />
-             
+              <Route path="/categoria" element={<Categoria />} />
+
+          
+
+              
+
               {/* RUTA PROTEGIDA - para Usuarios */}
-              <Route path="/pagar" element={<RutaProtegida><Pagar /></RutaProtegida>}/>
-             
+              <Route path="/pagar" element={<RutaProtegida><Pagar /></RutaProtegida>} />
+
               {/* RUTA PROTEGIDA - para Admins */}
-              <Route path="/dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard /></RutaProtegida>}/>
-             
+              <Route path="/dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard /></RutaProtegida>} />
+
               {/* Ruta para formulario Agrega/Edita - Solo Admin */}
               <Route
                 path="/formulario-producto"
@@ -48,7 +60,7 @@ function App() {
                   </RutaProtegida>
                 }
               />
-             
+
               {/* Ruta para ELIMINAR producto - Solo Admin */}
               <Route
                 path="/eliminar-producto"
@@ -58,7 +70,7 @@ function App() {
                   </RutaProtegida>
                 }
               />
-             
+
               {/* Redirección por defecto */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

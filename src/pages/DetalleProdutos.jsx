@@ -3,13 +3,13 @@ import { useCartContext } from "../context/CartContext";
 import Productos from "../pages/Productos";
 
 const ProductoDetalle = () => {
- 
-    const { id } = useParams();
-    const location = useLocation();
-    const producto = location.state?.producto;
-    const { agregarAlCarrito } = useCartContext();
- 
-if (!producto) {
+
+  const { id } = useParams();
+  const location = useLocation();
+  const producto = location.state?.producto;
+  const { agregarAlCarrito } = useCartContext();
+
+  if (!producto) {
     return (
       <div>
         <p>No se pudo cargar el producto</p>
@@ -19,24 +19,34 @@ if (!producto) {
       </div>
     );
   }
- 
-  return(
+
+  return (
     <>
-    
-    <h2>{producto.title} </h2>
-    <ul>
-        <li key={producto.id}>
-            <h4>Codigo -{id}</h4>            
-            <br />
-            <img src={producto.image} alt={producto.title} width="30%" />
-            <p><strong>Descripción: </strong>{producto.description}</p>
-            <h2>Precio: ${producto.price}</h2>
-            
-        </li>
-        <hr />
-        <Link to={`/productos`}><button>Volver</button></Link>
-        <button onClick={() => agregarAlCarrito(producto)}>Comprar</button>
-    </ul>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <img src={producto.image} alt={producto.title} width="80%" />
+          </div>
+          <div class="col-sm-9">
+            <div class="row">
+              <div class="col-8 col-sm-6">
+                <h2>
+                  {producto.id}
+                  </h2>
+                <h4>Codigo -{id}</h4>
+                <p><strong>Descripción: </strong>{producto.description}</p>
+              </div>
+              <div class="col-4 col-sm-6">
+                <h2>Precio: ${producto.price}</h2>
+              </div>
+              <div>
+                <Link to={`/productos`}><button>Volver</button></Link>
+                <button onClick={() => agregarAlCarrito(producto)}>Comprar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }; export default ProductoDetalle;
