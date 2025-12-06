@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../context/AuthContext';
 import { useCartContext } from '../context/CartContext';
-import '../styles/styleNavbar.css';
+
 
 
 
@@ -42,7 +42,7 @@ function Navbar() {
                <button type="button" class="btn btn-outline-success m-1"> <Link class="text-white text-decoration-none" to="/categoria">Categoria</Link></button>
               </li>
               <li >
-                  <button type="button" class="btn btn-outline-success m-1 text-white text-decoration-none"> <Link class="text-white text-decoration-none" to="#" className="carrito-link">
+                  <button type="button" class="btn btn-outline-success m-1 "> <Link class="text-white text-decoration-none" to="#" className="carrito-link">
                   🛒 ({cantidadTotal})
                 </Link></button>
               </li>
@@ -52,7 +52,7 @@ function Navbar() {
                   <><div class="container">
                     <div class="row">
                       <div class="col">
-                        <span>Hola, {usuario.nombre}</span>
+                        <span class="text-light fs-2">Hola, {usuario.nombre}</span>
                         <div class="col">
                           {/*ENLACE PARA ADMIN - Solo visible para admin*/}
                           {usuario?.nombre === "admin" && (
@@ -69,7 +69,7 @@ function Navbar() {
                           
                         </div>
                         <div class="col">
-                           <button type="button" class="btn btn-outline-success" onClick={manejarCerrarSesion}> cerrar sesion</button>
+                           <button type="button" class="btn btn-success" onClick={manejarCerrarSesion}>Cerrar sesion</button>
                         </div>
                       </div>
                     </div>

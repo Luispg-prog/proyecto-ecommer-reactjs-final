@@ -25,8 +25,8 @@ export default function CarritoCompras() {
                 {item.title} - ${Number(item.price).toFixed(3)}
                 (Cantidad: {item.cantidad || 1})
 
-                <button type="button" class="btn btn-primary btn-sm m-2" onClick={() => quitarCantidad(item.id)}>-</button>
-                <button type="button" class="btn btn-primary btn-sm m-2" onClick={() => agregarCantidad(item.id)}>+</button>
+                <button type="button" class="btn btn-success btn-sm m-2" onClick={() => quitarCantidad(item.id)}>-</button>
+                <button type="button" class="btn btn-success btn-sm m-2" onClick={() => agregarCantidad(item.id)}>+</button>
 
               </div>
             ))}
@@ -35,8 +35,8 @@ export default function CarritoCompras() {
               cantidadTotal: {cantidadTotal}
             </div>
             <div class="d-flex gap-2">
-              <button type="button" class="btn btn-primary btn-sm m-2" onClick={vaciarCarrito}>Vaciar Carrito</button>
-              <button type="button" class="btn btn-primary btn-sm m-2" onClick={irAPagar}>Pagar</button>
+              <button type="button" class="btn btn-success btn-sm m-2" onClick={vaciarCarrito}>Vaciar Carrito</button>
+              <button type="button" class="btn btn-success btn-sm m-2" onClick={irAPagar}>Pagar</button>
             </div>
           </>
         )}

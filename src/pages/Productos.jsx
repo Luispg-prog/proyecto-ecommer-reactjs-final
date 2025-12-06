@@ -82,29 +82,29 @@ export default function Productos() {
 
 const ProductoItem = ({ producto, esAdmin, onEditar, onEliminar, onAgregarCarrito }) => (
   <li>
-
     <p>Codigo:00{producto.id} -{producto.category}</p>
     <img src={producto.image} alt={producto.title} width="80%" />
     <h3>{producto.title}</h3>
     <p><strong>Precio: ${producto.price}</strong></p>
 
     <Link to={`/productos/${producto.id}`} state={{ producto }}>
-      <button>Más detalles</button>
+      <button class="btn btn-outline-success m-2">Más detalles</button>
     </Link>
 
-    <button onClick={onAgregarCarrito}>Comprar</button>
+    <button class="btn btn-outline-success" onClick={onAgregarCarrito}>Comprar</button>
 
     {/* BOTONES ADMIN - Agregar contenedor */}
     {esAdmin && (
       <div className="btn-admin-container">
-        <hr />
-        <button onClick={onEditar} className="btn-editar">
-          Editar
-        </button>
-        <button onClick={onEliminar} className="btn-eliminar">
-          Eliminar
-        </button>
+    
+        <button type="button" class="btn btn-secondary m-1" onClick={onEditar} >Editar</button>
+        <button type="button" class="btn btn-danger m-1" onClick={onEliminar} >Eliminar</button>
       </div>
     )}
   </li>
+
+
 );
+
+
+

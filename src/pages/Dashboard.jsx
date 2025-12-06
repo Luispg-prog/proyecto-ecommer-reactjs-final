@@ -19,7 +19,7 @@ export default function Dashboard() {
       <h1>Administrativo</h1>
       <div style={{ background: '#f5f5f5', padding: '20px', borderRadius: '8px' }}>
         <p><strong>Sesión iniciada como: </strong> {usuario.nombre}</p>
-       
+
         {/* TOKEN */}
         <div style={{
           background: '#e9ecef',
@@ -37,52 +37,19 @@ export default function Dashboard() {
         <div style={{ margin: '20px 0' }}>
           <h3>Acciones:</h3>
           <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px' }}>
-            <button
-              onClick={manejarAgregarProducto}
-              style={{
-                padding: '10px 20px',
-                background: '#28a745',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '4px',
-                border: 'none',
-                cursor: 'pointer',
-                display: 'inline-block'
-              }}
-            >
+            <button  onClick={manejarAgregarProducto} type="button" class="btn btn-success"            >
               Agregar Productos
             </button>
-           
-            <Link
-              to="/productos"
-              style={{
-                padding: '10px 20px',
-                background: '#17a2b8',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '4px',
-                display: 'inline-block'
-              }}
-            >
+
+            <Link to="/productos" type="button" class="btn btn-primary "            >
               Ver / Editar / Eliminar Productos
             </Link>
           </div>
         </div>
         <hr></hr>
-       
+
         {/* BOTÓN CERRAR SESIÓN */}
-        <button
-          onClick={cerrarSesion}
-          style={{
-            padding: '10px 20px',
-            background: '#dc3545',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            marginTop: '10px'
-          }}
-        >
+        <button  onClick={cerrarSesion} type="button" class="btn btn-danger">
           Cerrar sesión
         </button>
       </div>

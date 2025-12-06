@@ -85,35 +85,15 @@ function EliminarProducto() {
 
 
       <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
-        <button
+        <button type="button" class="btn btn-danger"
           onClick={manejarEliminar}
-          disabled={cargando}
-          style={{
-            padding: '12px 24px',
-            backgroundColor: cargando ? '#ccc' : '#dc3545',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: cargando ? 'not-allowed' : 'pointer',
-            fontSize: '16px'
-          }}
-        >
+          disabled={cargando} >
           {cargando ? 'Eliminando...' : 'Sí, Eliminar'}
         </button>
        
-        <button
+        <button type="button" class="btn btn-secondary"
           onClick={() => navigate('/productos')}
-          disabled={cargando}
-          style={{
-            padding: '12px 24px',
-            backgroundColor: cargando ? '#ccc' : '#6c757d',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: cargando ? 'not-allowed' : 'pointer',
-            fontSize: '16px'
-          }}
-        >
+          disabled={cargando} >
           Cancelar
         </button>
       </div>
