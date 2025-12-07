@@ -78,13 +78,7 @@ function FormularioProducto() {
       if (modo === "agregar") {
         // Usar el contexto para agregar producto
         const nuevoProducto = await agregarProducto(productoEnviar);
-        Swal.fire({
-          title: 'Producto Agregado',
-          text: `"${nuevoProducto.title}" con ID: ${nuevoProducto.id}`,
-          icon: "success",
-          confirmButtonText: 'Aceptar'
-        });
-      
+  alert(`Producto "${nuevoProducto.title}" agregado correctamente con ID: ${nuevoProducto.id}`);
 
         // Limpiar formulario después del éxito
         setProducto({
@@ -119,12 +113,7 @@ function FormularioProducto() {
       setErrores({});
 
     } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: `Hubo un problema al ${modo === "editar" ? 'actualizar' : 'agregar'} el producto.`,
-        confirmButtonText: 'Aceptar'
-      });
+      alert(`Hubo un problema al ${modo === "editar" ? 'actualizar' : 'agregar'} el producto`);
       console.error('Error:', error);
     } finally {
       setCargando(false);
