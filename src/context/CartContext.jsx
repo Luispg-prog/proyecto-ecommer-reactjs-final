@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import { useModal } from './ModalContext';
 
 // Crear el contexto
 export const CartContext = createContext();
@@ -7,12 +8,13 @@ export const CartContext = createContext();
 export function CartProvider({ children }) {
   // Estado del carrito
   const [carrito, setCarrito] = useState([]);
+  const { showModal } = useModal();
 
   // Funciones para el carrito
-const agregarAlCarrito = (producto) => {
+  const agregarAlCarrito = (producto) => {
     setCarrito(prevCarrito => {
       const productoExistente = prevCarrito.find(item => item.id === producto.id);
-     
+
       if (productoExistente) {
         return prevCarrito.map(item =>
           item.id === producto.id
@@ -23,7 +25,9 @@ const agregarAlCarrito = (producto) => {
         return [...prevCarrito, { ...producto, cantidad: 1 }];
       }
     });
-    alert(`Producto ${producto.title} agregado.`);
+
+    showModal({ title: 'Producto agregado', message: `Producto ${producto.title} agregado.`, type: 'success' });
+    //alert(`Producto ${producto.title} agregado.`);
   };
 
   const vaciarCarrito = () => {
@@ -34,7 +38,7 @@ const agregarAlCarrito = (producto) => {
     setCarrito(carrito.filter(item => item.id !== productoId));
   };
 
-   const quitarCantidad = (idProducto) => {
+  const quitarCantidad = (idProducto) => {
     const carritoActualizado = carrito.map(producto => {
       if (producto.id === idProducto) {
         const cantidadActual = producto.cantidad || 1;
@@ -50,7 +54,7 @@ const agregarAlCarrito = (producto) => {
     setCarrito(carritoActualizado);
   };
 
-    const agregarCantidad = (idProducto) => {
+  const agregarCantidad = (idProducto) => {
     const nuevoCarrito = carrito.map(producto => {
       if (producto.id === idProducto) {
         return {
@@ -69,9 +73,9 @@ const agregarAlCarrito = (producto) => {
   }, 0);
 
   const cantidadTotal = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
- 
+
   // Valor que se provee a todos los componentes
-  const value = {  
+  const value = {
     // Carrito
     carrito,
     agregarAlCarrito,

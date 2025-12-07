@@ -30,18 +30,16 @@ const ProductoDetalle = () => {
           <div class="col-sm-9">
             <div class="row">
               <div class="col-8 col-sm-6">
-                <h2>
-                  {producto.id}
-                  </h2>
-                <h4>Codigo -{id}</h4>
+                
+                <h4>Codigo -00{id}</h4>
                 <p><strong>Descripción: </strong>{producto.description}</p>
               </div>
-              <div class="col-4 col-sm-6">
+              
                 <h2>Precio: ${producto.price}</h2>
-              </div>
+              
               <div>
-                <Link to={`/productos`}><button>Volver</button></Link>
-                <button onClick={() => agregarAlCarrito(producto)}>Comprar</button>
+                <Link  to={`/productos`}><button className="btn btn-outline-success m-2">Volver</button></Link>
+                <button className="btn btn-outline-success m-2" onClick={() => agregarAlCarrito(producto)}>Comprar</button>
               </div>
             </div>
           </div>

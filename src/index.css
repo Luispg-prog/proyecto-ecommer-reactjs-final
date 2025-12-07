@@ -23,3 +23,39 @@ main {
   padding-left: 15%;
 }
 
+/* Toastify overrides: ocultar la zona gris/espacio del contenedor cuando esté vacío
+   y asegurarse que el contenedor no rompa el layout. */
+.Toastify__toast-container {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  pointer-events: none; /* evita capturar eventos cuando no hay toasts */
+  position: fixed !important;
+}
+.Toastify__toast-container .Toastify__toast {
+  pointer-events: auto; /* permitir interacción sobre toasts individuales */
+}
+.Toastify__toast-container:empty {
+  display: none !important;
+}
+
+/* Reducir ancho mínimo/maximo de los toasts y centrar el contenedor */
+.Toastify__toast-container {
+  width: 20px;
+  max-width: 5px ;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: 8px !important;
+  right: auto !important;
+}
+.Toastify__toast {
+  min-width: 120px !important;
+  max-width: 280px !important;
+  padding: 8px 10px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
+  background: rgba(0,0,0,0.75) !important;
+  color: #fff !important;
+  font-size: 0.95rem !important;
+}
+

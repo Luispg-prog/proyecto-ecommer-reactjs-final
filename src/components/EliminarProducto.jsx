@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useModal } from '../context/ModalContext';
 
 function EliminarProducto() {
   const location = useLocation();
@@ -7,6 +8,7 @@ function EliminarProducto() {
   const producto = location.state?.producto;
 
   const [cargando, setCargando] = useState(false);
+  const { showModal } = useModal();
 
   // Función para eliminar producto
   const eliminarProducto = async () => {
@@ -23,12 +25,6 @@ function EliminarProducto() {
         throw new Error('Error al eliminar el producto.');
       }
 
-      Swal.fire({
-        title: `Producto "${producto?.title || 'sin nombre'}" eliminado`,
-        text: "Producto eliminado correctamente.",
-        icon: "success",
-        confirmButtonText: 'Aceptar'
-      });
 
       //alert('Producto eliminado correctamente.');
 
@@ -39,7 +35,8 @@ function EliminarProducto() {
 
     } catch (error) {
       console.error(error.message);
-      alert('Hubo un problema al eliminar el producto.');
+      showModal({ title: 'Error', message: 'Hubo un problema al eliminar el producto.', type: 'error' });
+      //alert('Hubo un problema al eliminar el producto.');
     } finally {
       setCargando(false);
     }

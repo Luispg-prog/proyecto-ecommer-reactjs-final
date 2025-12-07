@@ -17,6 +17,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { ProductsProvider } from "./context/ProductsContext";
+import { ModalProvider } from "./context/ModalContext";
+
 import Dashboard from "./pages/Dashboard";
 import FormularioProducto from './components/FormularioProducto';
 import EliminarProducto from './components/EliminarProducto';
@@ -26,8 +28,10 @@ function App() {
   return (
     <div>
       <AuthProvider>
-        <CartProvider>
-          <ProductsProvider>
+        <ModalProvider>
+          <CartProvider>
+            <ProductsProvider>
+            
             <Navbar />
             <Routes>
 
@@ -77,6 +81,7 @@ function App() {
             <Footer />
           </ProductsProvider>
         </CartProvider>
+        </ModalProvider>
       </AuthProvider>
     </div>
   );

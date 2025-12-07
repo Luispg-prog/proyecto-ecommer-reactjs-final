@@ -1,22 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from '../context/AuthContext';
 import { useCartContext } from '../context/CartContext';
+import { useModal } from '../context/ModalContext';
 
 export default function Pagar() {
   const { usuario, cerrarSesion } = useAuthContext();
   const { carrito, total, vaciarCarrito } = useCartContext();
   const navigate = useNavigate();
+  const { showModal } = useModal();
 
   const tokenActual = localStorage.getItem('authToken');
 
   // Función para finalizar compra
   const comprar = () => {
-    Swal.fire({
-      title: `Gracias, ${usuario?.nombre || 'Usuario'}!`,
-      text: "Tu compra se ha procesado correctamente.",
-      icon: "success"
-    });
-    //alert("¡Compra realizada con éxito!");
+    showModal({ title: 'Compra realizada', message: '¡Compra realizada con éxito!', type: 'success' });
     vaciarCarrito(); // Limpiar carrito después de comprar
     navigate("/productos");
   };
