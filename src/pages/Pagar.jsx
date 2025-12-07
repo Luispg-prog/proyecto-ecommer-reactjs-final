@@ -11,7 +11,12 @@ export default function Pagar() {
 
   // Función para finalizar compra
   const comprar = () => {
-    alert("¡Compra realizada con éxito!");
+    Swal.fire({
+      title: `Gracias, ${usuario?.nombre || 'Usuario'}!`,
+      text: "Tu compra se ha procesado correctamente.",
+      icon: "success"
+    });
+    //alert("¡Compra realizada con éxito!");
     vaciarCarrito(); // Limpiar carrito después de comprar
     navigate("/productos");
   };
@@ -20,9 +25,9 @@ export default function Pagar() {
     <div>
       {/* Info del usuario */}
       <div>
-        <h2>Hola {usuario.nombre}</h2>
-        <p>Email: {usuario.email}</p>
-       
+        <h2 class="text-center m-3">Hola {usuario.nombre}</h2>
+        <p class="text-center m-2">Email: {usuario.email}</p>
+
         {/* Estilo para el Token */}
         <div style={{
           background: '#f0f0f0',
@@ -33,8 +38,11 @@ export default function Pagar() {
           wordBreak: 'break-all'
         }}>
           <strong>Token:</strong> {tokenActual}
+        </div >
+        <div class="text-center">
+          <button type="button" class="btn btn-danger text-center" onClick={cerrarSesion}>Cerrar sesión</button>
         </div>
-        <button onClick={cerrarSesion}>Cerrar sesión</button>
+
         <hr />
       </div>
 
@@ -67,12 +75,12 @@ export default function Pagar() {
           <p>No hay productos en el carrito</p>
         )}
       </div>
-      
+
       <div>
         {carrito.length > 0 && (
-          <button onClick={comprar}>Confirmar y Pagar</button>
+          <button type="button" class="btn btn-success m-1" onClick={comprar}>Confirmar y Pagar</button>
         )}
-        <button onClick={() => navigate("/productos")}>
+        <button type="button" class="btn btn-success m-1" onClick={() => navigate("/productos")}>
           {carrito.length > 0 ? "Seguir Comprando" : "Volver a Productos"}
         </button>
       </div>

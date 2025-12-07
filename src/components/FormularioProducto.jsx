@@ -6,13 +6,13 @@ function FormularioProducto() {
   const navigate = useNavigate();
   const location = useLocation();
   const { agregarProducto, editarProducto, validar } = useProducts();
- 
+
   // Obtener el producto pasado por el state
   const productoRecibido = location.state?.producto;
- 
+
   // Determina el modo
   const modo = productoRecibido ? "editar" : "agregar";
- 
+
   // Estados del componente
   const [producto, setProducto] = useState({
     id: '',
@@ -22,7 +22,7 @@ function FormularioProducto() {
     category: '',
     image: ''
   });
- 
+
   const [errores, setErrores] = useState({});
   const [cargando, setCargando] = useState(false);
 
@@ -43,12 +43,12 @@ function FormularioProducto() {
   // f(x) manejarCambios | inputs
   const manejarCambio = (e) => {
     const { name, value } = e.target;
-   
+
     // Valida longitud max. descripción
     if (name === 'description' && value.length > 200) return;
-   
+
     setProducto(prev => ({ ...prev, [name]: value }));
-   
+
     // Limpiar error del campo si existe
     if (errores[name]) {
       setErrores(prev => ({ ...prev, [name]: '' }));
@@ -64,7 +64,7 @@ function FormularioProducto() {
 
   const manejarEnvio = async (e) => {
     e.preventDefault();
-   
+
     // Valida antes de enviar usando el contexto
     if (!validarFormulario()) return;
 
@@ -78,8 +78,14 @@ function FormularioProducto() {
       if (modo === "agregar") {
         // Usar el contexto para agregar producto
         const nuevoProducto = await agregarProducto(productoEnviar);
-        alert(`Producto "${nuevoProducto.title}" agregado correctamente con ID: ${nuevoProducto.id}`);
-       
+        Swal.fire({
+          title: 'Producto Agregado',
+          text: `"${nuevoProducto.title}" con ID: ${nuevoProducto.id}`,
+          icon: "success",
+          confirmButtonText: 'Aceptar'
+        });
+      
+
         // Limpiar formulario después del éxito
         setProducto({
           id: '',
@@ -97,17 +103,28 @@ function FormularioProducto() {
       } else {
         // Usar el contexto para editar producto
         await editarProducto(productoEnviar);
-        alert('Producto actualizado correctamente');
+        Swal.fire({
+          icon: "success",
+          title: "Producto Actualizado",
+          text: `"${productoEnviar.title}" ha sido actualizado correctamente.`,
+          showConfirmButton: false,
+          timer: 2000
+        });
 
         setTimeout(() => {
           navigate('/productos');
         }, 100);
       }
-     
+
       setErrores({});
-     
+
     } catch (error) {
-      alert(`Hubo un problema al ${modo === "editar" ? 'actualizar' : 'agregar'} el producto`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: `Hubo un problema al ${modo === "editar" ? 'actualizar' : 'agregar'} el producto.`,
+        confirmButtonText: 'Aceptar'
+      });
       console.error('Error:', error);
     } finally {
       setCargando(false);
@@ -125,13 +142,13 @@ function FormularioProducto() {
   return (
     <form onSubmit={manejarEnvio} style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
       <h2>{modo === "editar" ? 'Editar' : 'Agregar'} Producto</h2>
-     
+
       {modo === "editar" && productoRecibido && (
         <p style={{ color: '#666', fontStyle: 'italic' }}>
           Editando: {productoRecibido.title} (ID: {productoRecibido.id})
         </p>
       )}
-     
+
       {/* Campo Nombre */}
       <div style={{ marginBottom: '15px' }}>
         <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
@@ -276,7 +293,7 @@ function FormularioProducto() {
             : (modo === "editar" ? 'Confirmar Cambios' : 'Agregar Producto')
           }
         </button>
-       
+
         {modo === "editar" && (
           <button
             type="button"
@@ -295,7 +312,7 @@ function FormularioProducto() {
           </button>
         )}
       </div>
-     
+
       <p>(*) Campos obligatorios</p>
     </form>
   );

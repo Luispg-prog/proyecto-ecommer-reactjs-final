@@ -100,7 +100,8 @@ const ProductoItem = ({ producto, esAdmin, onEditar, onEliminar, onAgregarCarrit
         <button type="button" class="btn btn-secondary m-1" onClick={onEditar} >Editar</button>
         <button type="button" class="btn btn-danger m-1" onClick={onEliminar} >Eliminar</button>
       </div>
-    )}
+    )
+  }
   </li>
 
 
