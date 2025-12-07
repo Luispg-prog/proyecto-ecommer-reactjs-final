@@ -9,10 +9,10 @@ export function CartProvider({ children }) {
   const [carrito, setCarrito] = useState([]);
 
   // Funciones para el carrito
-  const agregarAlCarrito = (producto) => {
+const agregarAlCarrito = (producto) => {
     setCarrito(prevCarrito => {
       const productoExistente = prevCarrito.find(item => item.id === producto.id);
-
+     
       if (productoExistente) {
         return prevCarrito.map(item =>
           item.id === producto.id
@@ -23,16 +23,7 @@ export function CartProvider({ children }) {
         return [...prevCarrito, { ...producto, cantidad: 1 }];
       }
     });
-
-    Swal.fire({
-      position: "top",
-      icon: "success",
-      title: 'Agregado a Carrito',
-      text: `Producto ${producto?.title || 'sin nombre'}`,
-      showConfirmButton: false,
-      timer: 1500
-    });
-    //alert(`Producto ${producto.title} agregado.`);
+    alert(`Producto ${producto.title} agregado.`);
   };
 
   const vaciarCarrito = () => {
@@ -43,7 +34,7 @@ export function CartProvider({ children }) {
     setCarrito(carrito.filter(item => item.id !== productoId));
   };
 
-  const quitarCantidad = (idProducto) => {
+   const quitarCantidad = (idProducto) => {
     const carritoActualizado = carrito.map(producto => {
       if (producto.id === idProducto) {
         const cantidadActual = producto.cantidad || 1;
@@ -59,7 +50,7 @@ export function CartProvider({ children }) {
     setCarrito(carritoActualizado);
   };
 
-  const agregarCantidad = (idProducto) => {
+    const agregarCantidad = (idProducto) => {
     const nuevoCarrito = carrito.map(producto => {
       if (producto.id === idProducto) {
         return {
@@ -78,9 +69,9 @@ export function CartProvider({ children }) {
   }, 0);
 
   const cantidadTotal = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
-
+ 
   // Valor que se provee a todos los componentes
-  const value = {
+  const value = {  
     // Carrito
     carrito,
     agregarAlCarrito,
